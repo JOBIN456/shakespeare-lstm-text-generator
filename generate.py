@@ -23,7 +23,7 @@ print("Tokenizer loaded successfully!")
 # (Must be same as training)
 # ---------------------------
 # If you know the value from training, put it directly.
-# Example: max_seq_len = 15
+# Example: max_seq_lens = 15
 # If not sure, rebuild quickly from dataset.
 
 with open("shakespeare.txt", "r", encoding="utf-8") as f:
@@ -35,7 +35,7 @@ for line in text.split('\n'):
     for i in range(1, len(token_list)):
         input_sequences.append(token_list[:i+1])
 
-max_seq_len = max(len(seq) for seq in input_sequences)
+max_seq_lens = max(len(seq) for seq in input_sequences)
 
 # ---------------------------
 # TEXT GENERATION FUNCTION
@@ -46,7 +46,7 @@ def generate_text(seed_text, next_words=50):
         token_list = tokenizer.texts_to_sequences([seed_text])[0]
         token_list = pad_sequences(
             [token_list],
-            maxlen=max_seq_len-1,
+            maxlen=max_seq_lens-1,
             padding='pre'
         )
 
